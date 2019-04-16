@@ -9,4 +9,4 @@ def home():
     return 'fuck me'
 
 
-app.run(port=5000)
+app.run()
