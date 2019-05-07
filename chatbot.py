@@ -19,6 +19,7 @@ def message(body, headers, access_token):
     reply_token = body['replyToken']
     if 'gnomo' in body['message']['text']:
         reply('Vai se fuder gnomo.', reply_token, access_token)
+    #parse_message(body['message']['text'])
 
 
 def reply(text, reply_token, access_token):

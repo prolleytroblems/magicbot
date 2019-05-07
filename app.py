@@ -40,18 +40,18 @@ def hook_home():
     verify_source(body, headers, CHANNEL_SECRET)
 
     body = json.loads(body.decode('utf-8'))
-    print(body)
-
     response_funcs = {
         "message": message,
         "follow": follow,
         "join": join
     }
 
-    if body['type'] not in response_funcs:
-        return Response()
+    for event in body['events']:
+        if body['type'] not in response_funcs:
+            pass
+        else:
+            response_funcs[headers['type']](body, headers, access_token)
 
-    response_funcs[headers['type']](body, headers, access_token)
     return Response()
 
 
