@@ -1,9 +1,11 @@
 import time
 import json
 
-
 from flask import Flask, jsonify, make_response, request
 import requests
+
+from chatbot import verify
+
 
 app = Flask(__name__)
 
