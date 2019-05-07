@@ -1,11 +1,10 @@
 import time
 import json
 
-from flask import Flask, jsonify, make_response, request
+from flask import Flask, jsonify, make_response, request, Response
 import requests
-from werkzeug.exceptions import Unauthorized
 
-from chatbot import verify_source
+from chatbot import verify_source, message, follow, join
 
 
 app = Flask(__name__)
@@ -38,14 +37,19 @@ def hook_home():
     body = request.get_data()
     headers = request.headers
 
-    if not(verify_source(body, headers, CHANNEL_SECRET)):
-        raise Unauthorized(description="Not from Line!")
-    """responses = {
+    verify_source(body, headers, CHANNEL_SECRET)
+
+    response_funcs = {
         "message": message,
         "follow": follow,
         "join": join
-    }"""
-    return jsonify({'womp':'womp'})
+    }
+
+    if headers['type'] not in response_funcs:
+        return Response()
+
+    response_funcs[headers['type']](body, headers, access_token)
+    return Response()
 
 
 if __name__=="__main__":
