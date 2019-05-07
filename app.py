@@ -4,7 +4,7 @@ import json
 from flask import Flask, jsonify, make_response, request
 import requests
 
-from chatbot import verify
+from chatbot import verify_source
 
 
 app = Flask(__name__)
