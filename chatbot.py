@@ -11,4 +11,4 @@ def verify_source(request_obj, channel_secret):
     hash = hmac.new(channel_secret.encode('utf-8'), body, hashlib.sha256).digest()
     signature = base64.b64encode(hash)
 
-    return hash==signature
+    return request_obj.headers['X-Line_Signature']==signature
