@@ -34,10 +34,12 @@ def hook_home():
 
     #Make sure the body is not too big (100kB limit)
     assert request.content_length < 100000
-    body = request.get_data()
-    headers = request.headers
+    body = request.get_data().decode('utf-8')
 
     verify_source(body, headers, CHANNEL_SECRET)
+
+    body = json.loads(body)
+    headers = request.headers
 
     response_funcs = {
         "message": message,
@@ -45,7 +47,7 @@ def hook_home():
         "join": join
     }
 
-    if headers['type'] not in response_funcs:
+    if body['type'] not in response_funcs:
         return Response()
 
     response_funcs[headers['type']](body, headers, access_token)
