@@ -10,4 +10,4 @@ def verify_source(body_bytestr, headers, channel_secret):
     print(signature)
     return signature==headers['X-Line-Signature']
 
-def message(body_bytestr, headers)
+#def message(body_bytestr, headers)
