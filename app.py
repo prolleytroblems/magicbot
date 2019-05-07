@@ -34,12 +34,12 @@ def hook_home():
 
     #Make sure the body is not too big (100kB limit)
     assert request.content_length < 100000
-    body = request.get_data().decode('utf-8')
+    body = request.get_data()
     headers = request.headers
 
     verify_source(body, headers, CHANNEL_SECRET)
 
-    body = json.loads(body)
+    body = json.loads(body.decode('utf-8'))
 
     response_funcs = {
         "message": message,
