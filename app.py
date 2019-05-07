@@ -1,7 +1,7 @@
 import time
 import json
 
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, make_response, request
 import requests
 
 app = Flask(__name__)
@@ -21,6 +21,12 @@ def home(cardname):
         return response
     else:
         return "Womp womp"
+
+@app.route('/webhook')
+def hook_home():
+    print(request.get_json())
+
+
 
 if __name__=="__main__":
     app.run()
