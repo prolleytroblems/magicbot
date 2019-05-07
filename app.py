@@ -3,6 +3,7 @@ import json
 
 from flask import Flask, jsonify, make_response, request
 import requests
+from werkzeug.exceptions import Unauthorized
 
 from chatbot import verify_source
 
@@ -37,7 +38,8 @@ def hook_home():
     body = request.get_data()
     headers = request.headers
 
-    print(verify_source(body, headers, CHANNEL_SECRET))
+    if not(verify_source(body, headers, CHANNEL_SECRET)):
+        raise Unauthorized(description="Not from Line!")
     """responses = {
         "message": message,
         "follow": follow,
