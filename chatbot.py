@@ -18,13 +18,12 @@ def message(event, headers, access_token):
 
     reply_token = event['replyToken']
     if 'gnomo' in event['message']['text']:
-        print('replying')
         #make this on a separate thread
         reply('Vai se fuder gnomo.', reply_token, access_token)
 
-    """queue = parse_message(event['message']['text'])
-    for task in queue:
-        if task
+    """tasks = parse_message(event['message']['text'])
+    for task in tasks:
+        task['func'](event, access_token)
         """
 
 def reply(text, reply_token, access_token):
@@ -35,10 +34,12 @@ def reply(text, reply_token, access_token):
 
     data = {
         'replyToken': reply_token,
-        'messages': {
-            'type': 'text',
-            'text': text
-        }
+        'messages': [
+            {
+                'type': 'text',
+                'text': text
+            }
+        ]
     }
     requests.post('https://api.line.me/v2/bot/message/reply', headers=headers, data=data)
 
