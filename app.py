@@ -1,10 +1,14 @@
 import time
 import json
 
+
 from flask import Flask, jsonify, make_response, request
 import requests
 
 app = Flask(__name__)
+
+CHANNEL_SECRET = '99a7817c6e0604a686d21762b383d841'
+ACCESS_TOKEN="mnWXUykYKquGDtTsP/4huxp4xkDIratVILDd/Ep4gSRxC4IIF9hOWFd3WMVi2J261MEVT0rTgoBWf0b4IbU1ttLhvsvHTi6KIj5PwNQRSoLa6XPapgZLmAME8lYXdCmxSw+JtLuWMroDeRSekMIxJwdB04t89/1O/w1cDnyilFU="
 
 
 
@@ -26,6 +30,7 @@ def home(cardname):
 def hook_home():
     print(request.get_json())
     print(request.headers)
+    print(verify(request, CHANNEL_SECRET))
     return jsonify({'womp':'womp'})
 
 

@@ -1,4 +1,13 @@
+import base64
+import hashlib
+import hmac
 
 
+def verify_source(request_obj, channel_secret):
+    #Make sure the body is not too big (100kB limit)
+    assert request_obj.content_length < 100000
+    body = request.get_data()
+    hash = hmac.new(channel_secret.encode('utf-8'), body, hashlib.sha256).digest()
+    signature = base64.b64encode(hash)
 
-ACCESS_TOKEN="mnWXUykYKquGDtTsP/4huxp4xkDIratVILDd/Ep4gSRxC4IIF9hOWFd3WMVi2J261MEVT0rTgoBWf0b4IbU1ttLhvsvHTi6KIj5PwNQRSoLa6XPapgZLmAME8lYXdCmxSw+JtLuWMroDeRSekMIxJwdB04t89/1O/w1cDnyilFU="
+    return hash==signature
