@@ -33,6 +33,11 @@ def hook_home():
     print(request.get_json())
     print(request.headers)
     print(verify_source(request, CHANNEL_SECRET))
+    """responses = {
+        "message": message,
+        "follow": follow,
+        "join": join
+    }"""
     return jsonify({'womp':'womp'})
 
 
