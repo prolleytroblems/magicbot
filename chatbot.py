@@ -18,6 +18,8 @@ def message(event, headers, access_token):
 
     reply_token = event['replyToken']
     if 'gnomo' in event['message']['text']:
+        print('replying')
+        #make this on a separate thread
         reply('Vai se fuder gnomo.', reply_token, access_token)
 
     """queue = parse_message(event['message']['text'])
