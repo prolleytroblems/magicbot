@@ -22,10 +22,10 @@ def home(cardname):
     else:
         return "Womp womp"
 
-@app.route('/webhook')
+@app.route('/webhook', methods=['POST'])
 def hook_home():
     print(request.get_json())
-
+    return jsonify({'womp':'womp'})
 
 
 if __name__=="__main__":
