@@ -14,15 +14,16 @@ def verify_source(body_bytestr, headers, channel_secret):
         raise Unauthorized(description="Not from Line!")
 
 def message(event, headers, access_token):
-    assert body['type']=='message'
+    assert event['type']=='message'
 
     reply_token = event['replyToken']
     if 'gnomo' in event['message']['text']:
         reply('Vai se fuder gnomo.', reply_token, access_token)
 
-    #queue = parse_message(event['message']['text'])
-    #for task in queue:
-
+    """queue = parse_message(event['message']['text'])
+    for task in queue:
+        if task
+        """
 
 def reply(text, reply_token, access_token):
     headers = {
