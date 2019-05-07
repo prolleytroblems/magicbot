@@ -31,8 +31,13 @@ def home(cardname):
 @app.route('/webhook', methods=['POST'])
 def hook_home():
     print(request.get_json())
-    print(request.headers)
-    print(verify_source(request, CHANNEL_SECRET))
+
+    #Make sure the body is not too big (100kB limit)
+    assert request.content_length < 100000
+    body = request.get_data()
+    headers = request.headers
+
+    print(verify_source(body, headers['X-Line-Signature'], CHANNEL_SECRET))
     """responses = {
         "message": message,
         "follow": follow,
