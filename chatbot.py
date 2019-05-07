@@ -35,3 +35,9 @@ def reply(text, reply_token, access_token):
         }
     }
     requests.post('https://api.line.me/v2/bot/message/reply', headers=headers, data=data)
+
+def follow():
+    pass
+
+def join():
+    pass
