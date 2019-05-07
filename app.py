@@ -40,6 +40,7 @@ def hook_home():
     verify_source(body, headers, CHANNEL_SECRET)
 
     body = json.loads(body.decode('utf-8'))
+    print(body)
 
     response_funcs = {
         "message": message,
