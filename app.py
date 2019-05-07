@@ -25,6 +25,7 @@ def home(cardname):
 @app.route('/webhook', methods=['POST'])
 def hook_home():
     print(request.get_json())
+    print(request.headers)
     return jsonify({'womp':'womp'})
 
 
