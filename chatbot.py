@@ -20,7 +20,8 @@ def message(event, headers, access_token):
     if 'gnomo' in event['message']['text']:
         reply('Vai se fuder gnomo.', reply_token, access_token)
 
-    #to_do=parse_message(event['message']['text'])
+    #queue = parse_message(event['message']['text'])
+    #for task in queue:
 
 
 def reply(text, reply_token, access_token):
