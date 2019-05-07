@@ -37,7 +37,7 @@ def hook_home():
     body = request.get_data()
     headers = request.headers
 
-    print(verify_source(body, headers['X-Line-Signature'], CHANNEL_SECRET))
+    print(verify_source(body, headers, CHANNEL_SECRET))
     """responses = {
         "message": message,
         "follow": follow,
