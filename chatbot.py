@@ -13,13 +13,14 @@ def verify_source(body_bytestr, headers, channel_secret):
     if signature!=headers['X-Line-Signature'].encode('utf-8'):
         raise Unauthorized(description="Not from Line!")
 
-def message(body, headers, access_token):
+def message(event, headers, access_token):
     assert body['type']=='message'
 
-    reply_token = body['replyToken']
-    if 'gnomo' in body['message']['text']:
+    reply_token = event['replyToken']
+    if 'gnomo' in event['message']['text']:
         reply('Vai se fuder gnomo.', reply_token, access_token)
-    #parse_message(body['message']['text'])
+
+    #to_do=parse_message(event['message']['text'])
 
 
 def reply(text, reply_token, access_token):

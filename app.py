@@ -47,10 +47,10 @@ def hook_home():
     }
 
     for event in body['events']:
-        if body['type'] not in response_funcs:
+        if event['type'] not in response_funcs:
             pass
         else:
-            response_funcs[headers['type']](body, headers, access_token)
+            response_funcs[headers['type']](event, headers, access_token)
 
     return Response()
 
