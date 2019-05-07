@@ -32,7 +32,7 @@ def home(cardname):
 def hook_home():
     print(request.get_json())
     print(request.headers)
-    print(verify(request, CHANNEL_SECRET))
+    print(verify_source(request, CHANNEL_SECRET))
     return jsonify({'womp':'womp'})
 
 
