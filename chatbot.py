@@ -19,7 +19,7 @@ def message(event, headers, access_token):
     assert event['type']=='message'
 
     reply_token = event['replyToken']
-    if 'gnomo' in event['message']['text']:
+    if 'gnomo' in event['message']['text'].lower():
         #make this on a separate thread
         insultar_gnomo('gnomo', reply_token, access_token)
 
