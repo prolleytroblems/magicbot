@@ -44,10 +44,12 @@ def reply(text, reply_token, access_token):
             }
         ]
     }
-    response = requests.post('https://api.line.me/v2/bot/message/reply', headers=headers, data=data)
-    print(response.headers)
-    print(response.content)
-
+    try:
+        response = requests.post('https://api.line.me/v2/bot/message/reply', headers=headers, data=data)
+        print(response.headers)
+        print(response.content)
+    except Exception as E:
+        print(E)
 
 def follow():
     pass
