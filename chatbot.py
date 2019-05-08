@@ -2,6 +2,7 @@ import base64
 import hashlib
 import hmac
 import json
+import time
 
 import requests
 
@@ -46,7 +47,7 @@ def reply(text, reply_token, access_token):
         ]
     }
     try:
-        response = requests.post('https://api.line.me/v2/bot/message/reply', headers=headers, data=jsonify(data))
+        response = requests.post('https://api.line.me/v2/bot/message/reply', headers=headers, data=json.dumps(data))
         print(response.headers)
         print(response.content)
     except Exception as E:
@@ -57,3 +58,15 @@ def follow():
 
 def join():
     pass
+
+def get_card(cardname):
+    response = requests.get("https://api.scryfall.com/cards/search?q="+cardname.replace(" ", "%20"))
+    if response.ok:
+        time.sleep(0.1)
+        image_url = json.loads(response.content)["data"][0]["image_uris"]["normal"]
+        response = requests.get(image_url)
+        response = make_response(response.content)
+        response.headers.set('Content-Type', 'image/png')
+        response.headers.set('Content-Disposition', 'attachment', filename='card.png')
+        return response
+    else:
