@@ -16,22 +16,10 @@ ACCESS_TOKEN="mnWXUykYKquGDtTsP/4huxp4xkDIratVILDd/Ep4gSRxC4IIF9hOWFd3WMVi2J261M
 
 @app.route('/<string:cardname>')
 def home(cardname):
-    response = requests.get("https://api.scryfall.com/cards/search?q="+cardname.replace(" ", "%20"))
-    if response.ok:
-        time.sleep(0.1)
-        image_url = json.loads(response.content)["data"][0]["image_uris"]["normal"]
-        response = requests.get(image_url)
-        response = make_response(response.content)
-        response.headers.set('Content-Type', 'image/png')
-        response.headers.set('Content-Disposition', 'attachment', filename='card.png')
-        return response
-    else:
-        return "Womp womp"
+    return "Womp womp"
 
 @app.route('/webhook', methods=['POST'])
 def hook_home():
-    print(request.get_json())
-
     #Make sure the body is not too big (100kB limit)
     assert request.content_length < 100000
     body = request.get_data()

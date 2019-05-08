@@ -20,7 +20,7 @@ def message(event, headers, access_token):
     reply_token = event['replyToken']
     if 'gnomo' in event['message']['text']:
         #make this on a separate thread
-        reply('Vai se fuder gnomo.', reply_token, access_token)
+        reply('You wrote: "gnomo". Did you mean: "cocozento?".', reply_token, access_token)
 
     """tasks = parse_message(event)
     for task in tasks:
@@ -48,8 +48,6 @@ def reply(text, reply_token, access_token):
     }
     try:
         response = requests.post('https://api.line.me/v2/bot/message/reply', headers=headers, data=json.dumps(data))
-        print(response.headers)
-        print(response.content)
     except Exception as E:
         print(E)
 
@@ -58,7 +56,7 @@ def follow():
 
 def join():
     pass
-"""
+
 def get_card(cardname):
     response = requests.get("https://api.scryfall.com/cards/search?q="+cardname.replace(" ", "%20"))
     if response.ok:
@@ -72,4 +70,4 @@ def get_card(cardname):
         response.headers.set('Content-Disposition', 'attachment', filename='card.png')
         return response
     else:
-"""
+        return Response()
