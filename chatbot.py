@@ -21,10 +21,13 @@ def message(event, headers, access_token):
         #make this on a separate thread
         reply('Vai se fuder gnomo.', reply_token, access_token)
 
-    """tasks = parse_message(event['message']['text'])
+    """tasks = parse_message(event)
     for task in tasks:
         task['func'](event, access_token)
         """
+
+def parse_message(event):
+    message = event['message']['text']
 
 def reply(text, reply_token, access_token):
     headers = {
@@ -41,7 +44,10 @@ def reply(text, reply_token, access_token):
             }
         ]
     }
-    requests.post('https://api.line.me/v2/bot/message/reply', headers=headers, data=data)
+    response = requests.post('https://api.line.me/v2/bot/message/reply', headers=headers, data=data)
+    print(response.headers)
+    print(response.content)
+
 
 def follow():
     pass
