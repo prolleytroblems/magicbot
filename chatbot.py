@@ -29,6 +29,7 @@ def message(event, headers, access_token):
 def parse_message(event):
     message = event['message']['text']
 
+
 def reply(text, reply_token, access_token):
     headers = {
         'Authorization': 'Bearer '+access_token,
@@ -45,7 +46,7 @@ def reply(text, reply_token, access_token):
         ]
     }
     try:
-        response = requests.post('https://api.line.me/v2/bot/message/reply', headers=headers, data=data)
+        response = requests.post('https://api.line.me/v2/bot/message/reply', headers=headers, data=jsonify(data))
         print(response.headers)
         print(response.content)
     except Exception as E:
