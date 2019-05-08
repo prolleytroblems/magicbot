@@ -58,15 +58,18 @@ def follow():
 
 def join():
     pass
-
+"""
 def get_card(cardname):
     response = requests.get("https://api.scryfall.com/cards/search?q="+cardname.replace(" ", "%20"))
     if response.ok:
         time.sleep(0.1)
-        image_url = json.loads(response.content)["data"][0]["image_uris"]["normal"]
+        uris = json.loads(response.content)["data"][0]["image_uris"]
+        image_url = uris["large"]
+        preview_url = uris
         response = requests.get(image_url)
         response = make_response(response.content)
         response.headers.set('Content-Type', 'image/png')
         response.headers.set('Content-Disposition', 'attachment', filename='card.png')
         return response
     else:
+"""
