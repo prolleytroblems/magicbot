@@ -3,6 +3,7 @@ import hashlib
 import hmac
 import json
 import time
+import random
 
 import requests
 
@@ -20,7 +21,7 @@ def message(event, headers, access_token):
     reply_token = event['replyToken']
     if 'gnomo' in event['message']['text']:
         #make this on a separate thread
-        reply('You wrote: "gnomo". Did you mean: "cocozento?".', reply_token, access_token)
+        insultar_gnomo('gnomo', reply_token, access_token)
 
     """tasks = parse_message(event)
     for task in tasks:
@@ -57,17 +58,18 @@ def follow():
 def join():
     pass
 
+def insultar_gnomo(text, reply_token, access_token):
+    insultos=['cocozento', 'cheirador de cueca', 'gordo', 'gnomeu', 'Paris Hilton', 'boiola', 'fedorento', 'o pior jogador de magic']
+    reply('You wrote: "gnomo". Did you mean: "'+random.choice(insultos)+'?".', reply_token, access_token)
+
+
 def get_card(cardname):
     response = requests.get("https://api.scryfall.com/cards/search?q="+cardname.replace(" ", "%20"))
     if response.ok:
         time.sleep(0.1)
         uris = json.loads(response.content)["data"][0]["image_uris"]
         image_url = uris["large"]
-        preview_url = uris
-        response = requests.get(image_url)
-        response = make_response(response.content)
-        response.headers.set('Content-Type', 'image/png')
-        response.headers.set('Content-Disposition', 'attachment', filename='card.png')
-        return response
+        preview_url = uris["small"]
+        return (image_url, preview_url)
     else:
         return Response()
