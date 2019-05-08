@@ -59,7 +59,8 @@ def join():
     pass
 
 def insultar_gnomo(text, reply_token, access_token):
-    insultos=['cocozento', 'cheirador de cueca', 'gordo', 'gnomeu', 'Paris Hilton', 'boiola', 'fedorento', 'o pior jogador de magic']
+    insultos=['cocozento', 'cheirador de cueca', 'gordo', 'gnomeu', 'Paris Hilton', 'boiola', 'fedorento', 'o pior jogador de magic',
+                'cheira-cola', 'sem-vergonha', 'descascador de batata', 'eletricista', 'bobao', 'pau no cu', 'babaca', 'vacilao']
     reply('You wrote: "gnomo". Did you mean: "'+random.choice(insultos)+'?".', reply_token, access_token)
 
 
