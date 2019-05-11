@@ -30,17 +30,15 @@ def message(event, headers, access_token):
         'cube': (text_reply, (CUBE_URL, reply_token, access_token)),
         'draft': (text_reply, (DRAFT_URL, reply_token, access_token)),
         'card': (cardsearch, (reply_token, access_token)),
-        'gnomo': (insultar_gnomo, (reply_token, access_token))
+        'gnomo': (insultar_gnomo, ('gnomo', reply_token, access_token))
     }
 
     results = parse_text(message)
+    print(results)
 
     for job in results:
         functions[job][0](*functions[job][1], inputs=results[job])
-
-    for task in tasks:
-        task['func'](event, access_token)
-
+        print(job)
 
 def text_reply(text, reply_token, access_token, *args, **kwargs):
     headers = {
