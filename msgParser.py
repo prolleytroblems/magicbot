@@ -12,7 +12,9 @@ def parse_text(text):
     text = text.lower()
     out = {}
     for thing in PATTERNS:
-        results = re.findall(text, PATTERNS[thing])
+        results = re.findall(PATTERNS[thing], text)
         if len(results) >0:
             out[thing]= results
     return out
+
+[bolt]
