@@ -9,7 +9,7 @@ import requests
 
 from werkzeug.exceptions import Unauthorized
 
-from .msgParser import parse_text
+from msgParser import parse_text
 
 CUBE_URL = 'https://manaburn.org/wizards/delouge/cubes/b47acf4/list'
 DRAFT_URL = 'https://manaburn.org/wizards/delouge/cubes/b47acf4/drafts'
