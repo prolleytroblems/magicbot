@@ -16,5 +16,3 @@ def parse_text(text):
         if len(results) >0:
             out[thing]= results
     return out
-
-[bolt]
