@@ -3,7 +3,7 @@ import re
 PATTERNS = {
     'cube': r'bot.*(cube|cubo)',
     'draft': r'bot.*(draft)',
-    'card': r"\[([\w ]*?)\]"
+    'card': r"\[([\w ]*?)\]",
     'gnomo': r'gnomo'
 }
 
@@ -14,5 +14,5 @@ def parse_text(text):
     for thing in PATTERNS:
         results = re.findall(text, PATTERNS[thing])
         if len(results) >0:
-            out[thing]sdf[] = results
+            out[thing]= results
     return out
