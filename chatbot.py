@@ -93,6 +93,7 @@ def insultar_gnomo(text, reply_token, access_token, *args, **kwargs):
     text_reply('You wrote: "gnomo". Did you mean: "'+random.choice(insultos)+'"?.', reply_token, access_token)
 
 def cardsearch(reply_token, access_token, inputs, *args, **kwargs):
+    print(inputs)
     for input in inputs:
         image = get_card(input)
         image_reply(image, reply_token, access_token, *args, **kwargs)
@@ -101,9 +102,18 @@ def get_card(cardname):
     response = requests.get("https://api.scryfall.com/cards/search?q="+cardname.replace(" ", "%20").replace("'", "%27"))
     if response.ok:
         time.sleep(0.1)
-        uris = json.loads(response.content)["data"][0]["image_uris"]
-        image_url = uris["large"]
-        preview_url = uris["small"]
-        return (image_url, preview_url)
+        content = json.loads(response.content)["data"][0]
+        if content['layout']=='normal' or content['layout']=='meld':
+            uris = content["image_uris"]
+            image_url = uris["large"]
+            preview_url = uris["small"]
+            return (image_url, preview_url)
+        elif content['layout']=='transform':
+            for face in content['card_faces']:
+                if cardname.lower() in face['name'].lower():
+                    uris = face["image_uris"]
+                    image_url = uris["large"]
+                    preview_url = uris["small"]
+                    return (image_url, preview_url)
     else:
         return None
