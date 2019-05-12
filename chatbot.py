@@ -96,6 +96,7 @@ def cardsearch(reply_token, access_token, inputs, *args, **kwargs):
     print(inputs)
     for input in inputs:
         image = get_card(input)
+        print(input)
         image_reply(image, reply_token, access_token, *args, **kwargs)
 
 def get_card(cardname):
