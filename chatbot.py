@@ -119,22 +119,25 @@ def cardsearch(reply_token, access_token, inputs, *args, **kwargs):
     send_reply(msgs, reply_token, access_token, *args, **kwargs)
 
 def get_card(cardname):
-    response = requests.get("https://api.scryfall.com/cards/search?q="+cardname.replace(" ", "%20").replace("'", "%27"))
+    cardname = cardname.replace(" ", "%20").replace("'", "%27").replace('/', '%2F'))
+    response = requests.get("https://api.scryfall.com/cards/search?q="+cardname
     if response.ok:
         time.sleep(0.1)
         content = json.loads(response.content)["data"][0]
         if content['layout']=='normal' or content['layout']=='meld' or content['layout']=='split':
             uris = content["image_uris"]
-            image_url = uris["large"]
-            preview_url = uris["small"]
-            return (image_url, preview_url)
         elif content['layout']=='transform':
+            found = False
             for face in content['card_faces']:
                 if cardname.lower() in face['name'].lower():
                     uris = face["image_uris"]
-                    image_url = uris["large"]
-                    preview_url = uris["small"]
-                    return (image_url, preview_url)
+                    found = True
+            if not found:
+                uris = content['card_faces'][0][image_uris]
     else:
         print(response.content)
         return None
+
+    image_url = uris["large"]
+    preview_url = uris["small"]
+    return (image_url, preview_url)
