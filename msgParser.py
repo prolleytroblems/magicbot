@@ -3,7 +3,7 @@ import re
 PATTERNS = {
     'cube': r'bot.*(cube|cubo)',
     'draft': r'bot.*(draft)',
-    'card': r"\[([\w ]*?)\]",
+    'card': r"""\[([\w "/-']*?)\]""",
     'gnomo': r'gnomo',
     'goodbot': r'good.*bot',
     'cadu': r'(cadu|kadu)'
