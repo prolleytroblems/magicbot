@@ -14,6 +14,13 @@ from msgParser import parse_text
 CUBE_URL = 'https://manaburn.org/wizards/delouge/cubes/b47acf4/list'
 DRAFT_URL = 'https://manaburn.org/wizards/delouge/cubes/b47acf4/drafts'
 
+NO_CHIN = [
+    'https://i.kym-cdn.com/entries/icons/original/000/021/465/1476153817501.jpg',
+    'https://upload.wikimedia.org/wikipedia/en/5/56/Mr_Burns.png',
+    'https://vignette.wikia.nocookie.net/lifeofheroesrp/images/8/82/Ed.png/revision/latest?cb=20130413184918',
+    'https://vignette.wikia.nocookie.net/fairlyoddfanon/images/3/30/DENZEL_COCKER.jpg/revision/latest/scale-to-width-down/173?cb=20120610053046'
+]
+
 def verify_source(body_bytestr, headers, channel_secret):
     hash = hmac.new(channel_secret.encode('utf-8'), body_bytestr, hashlib.sha256).digest()
     signature = base64.b64encode(hash)
@@ -30,7 +37,9 @@ def message(event, headers, access_token):
         'cube': (text_reply, (CUBE_URL, reply_token, access_token)),
         'draft': (text_reply, (DRAFT_URL, reply_token, access_token)),
         'card': (cardsearch, (reply_token, access_token)),
-        'gnomo': (insultar_gnomo, ('gnomo', reply_token, access_token))
+        'gnomo': (insultar_gnomo, (reply_token, access_token)),
+        'goodbot': (good_bot, (reply_token, access_token)),
+        'cadu': (insultar_cadu, (reply_token, access_token))
     }
 
     results = parse_text(message)
@@ -40,7 +49,11 @@ def message(event, headers, access_token):
         functions[job][0](*functions[job][1], inputs=results[job])
         print(job)
 
-def text_reply(text, reply_token, access_token, *args, **kwargs):
+def text_reply(text, *args, **kwargs):
+    send_reply([text_msg(text)], *args, **kwargs)
+
+def send_reply(messages, reply_token, access_token, *args, **kwargs):
+    assert isinstance(messages, list)
     headers = {
         'Authorization': 'Bearer '+access_token,
         'Content-Type': 'application/json'
@@ -48,38 +61,26 @@ def text_reply(text, reply_token, access_token, *args, **kwargs):
 
     data = {
         'replyToken': reply_token,
-        'messages': [
-            {
-                'type': 'text',
-                'text': text
-            }
-        ]
+        'messages': messages
     }
     try:
         response = requests.post('https://api.line.me/v2/bot/message/reply', headers=headers, data=json.dumps(data))
     except Exception as E:
         print(E)
+        raise(E)
 
-def image_reply(image, reply_token, access_token, *args, **kwargs):
-    headers = {
-        'Authorization': 'Bearer '+access_token,
-        'Content-Type': 'application/json'
+def text_msg(text):
+    return {
+        'type': 'text',
+        'text': text
     }
 
-    data = {
-        'replyToken': reply_token,
-        'messages': [
-            {
-                'type': 'image',
-                'originalContentUrl': image[0],
-                'previewImageUrl': image[1]
-            }
-        ]
+def image_msg(image):
+    return {
+        'type': 'image',
+        'originalContentUrl': image[0],
+        'previewImageUrl': image[1]
     }
-    try:
-        response = requests.post('https://api.line.me/v2/bot/message/reply', headers=headers, data=json.dumps(data))
-    except Exception as E:
-        print(E)
 
 def follow():
     pass
@@ -87,17 +88,32 @@ def follow():
 def join():
     pass
 
-def insultar_gnomo(text, reply_token, access_token, *args, **kwargs):
-    insultos=['cocozento', 'cheirador de cueca', 'gordo', 'gnomeu', 'Paris Hilton', 'boiola', 'fedorento', 'o pior jogador de magic',
-                'cheira-cola', 'sem-vergonha', 'descascador de batata', 'eletricista', 'bobao', 'pau no cu', 'babaca', 'vacilao']
-    text_reply('You wrote: "gnomo". Did you mean: "'+random.choice(insultos)+'"?.', reply_token, access_token)
+def insultar_gnomo(reply_token, access_token, *args, **kwargs):
+    if random.random()>0.7:
+        insultos=['cocozento', 'cheirador de cueca', 'gordo', 'gnomeu', 'Paris Hilton', 'boiola', 'fedorento', 'o pior jogador de magic',
+                    'cheira-cola', 'sem-vergonha', 'descascador de batata', 'eletricista', 'bobao', 'pau no cu', 'babaca', 'vacilao',
+                    'baka', 'kisama', 'pumpunzento', 'mago verde']
+        text_reply('You wrote: "gnomo". Did you mean: "'+random.choice(insultos)+'"?.', reply_token, access_token)
+    else:
+        return Response()
+
+def insultar_cadu():
+    return Response()
+
+def good_bot(reply_token, access_token, *args, **kwargs):
+    if random.random()>0.4:
+        respostas = ['vsf seu arrombado, boa é sua mãe', 'brigado <3', 'valeu broder', '5 reais e tamo quits']
+        text_reply(random.choice(respostas), reply_token, access_token)
+    else:
+        return Response()
 
 def cardsearch(reply_token, access_token, inputs, *args, **kwargs):
     print(inputs)
+    msgs = []
     for input in inputs:
         image = get_card(input)
-        print(input)
-        image_reply(image, reply_token, access_token, *args, **kwargs)
+        msgs.append(image_msg(image))
+    send_reply(msgs, reply_token, access_token, *args, **kwargs)
 
 def get_card(cardname):
     response = requests.get("https://api.scryfall.com/cards/search?q="+cardname.replace(" ", "%20").replace("'", "%27"))
