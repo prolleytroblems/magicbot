@@ -5,7 +5,8 @@ PATTERNS = {
     'draft': r'bot.*(draft)',
     'card': r"\[([\w ]*?)\]",
     'gnomo': r'gnomo',
-    'goodbot': r'good.*bot'
+    'goodbot': r'good.*bot',
+    'cadu': r'(cadu|kadu)'
 }
 
 def parse_text(text):

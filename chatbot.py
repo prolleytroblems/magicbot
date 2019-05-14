@@ -6,7 +6,7 @@ import time
 import random
 
 import requests
-
+from flask import Response
 from werkzeug.exceptions import Unauthorized
 
 from msgParser import parse_text
@@ -89,7 +89,7 @@ def join():
     pass
 
 def insultar_gnomo(reply_token, access_token, *args, **kwargs):
-    if random.random()>0.7:
+    if random.random()>0.6:
         insultos=['cocozento', 'cheirador de cueca', 'gordo', 'gnomeu', 'Paris Hilton', 'boiola', 'fedorento', 'o pior jogador de magic',
                     'cheira-cola', 'sem-vergonha', 'descascador de batata', 'eletricista', 'bobao', 'pau no cu', 'babaca', 'vacilao',
                     'baka', 'kisama', 'pumpunzento', 'mago verde']
@@ -98,11 +98,14 @@ def insultar_gnomo(reply_token, access_token, *args, **kwargs):
         return Response()
 
 def insultar_cadu():
-    return Response()
+    if random.random()>0.7:
+        text_reply(random.choice(NO_CHIN), reply_token, access_token)
+    else:
+        return Response()
 
 def good_bot(reply_token, access_token, *args, **kwargs):
-    if random.random()>0.4:
-        respostas = ['vsf seu arrombado, boa é sua mãe', 'brigado <3', 'valeu broder', '5 reais e tamo quits']
+    if random.random()>0.5:
+        respostas = ['vsf seu arrombado, boa é sua mãe', 'brigado <3', 'valeu broder', 'prefiro uma nota de 20 que sua gratidão']
         text_reply(random.choice(respostas), reply_token, access_token)
     else:
         return Response()
@@ -120,7 +123,7 @@ def get_card(cardname):
     if response.ok:
         time.sleep(0.1)
         content = json.loads(response.content)["data"][0]
-        if content['layout']=='normal' or content['layout']=='meld':
+        if content['layout']=='normal' or content['layout']=='meld' or content['layout']=='split':
             uris = content["image_uris"]
             image_url = uris["large"]
             preview_url = uris["small"]
@@ -133,4 +136,5 @@ def get_card(cardname):
                     preview_url = uris["small"]
                     return (image_url, preview_url)
     else:
+        print(response.content)
         return None
