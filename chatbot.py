@@ -119,8 +119,8 @@ def cardsearch(reply_token, access_token, inputs, *args, **kwargs):
     send_reply(msgs, reply_token, access_token, *args, **kwargs)
 
 def get_card(cardname):
-    cardname = cardname.replace(" ", "%20").replace("'", "%27").replace('/', '%2F'))
-    response = requests.get("https://api.scryfall.com/cards/search?q="+cardname
+    cardname = cardname.replace(" ", "%20").replace("'", "%27").replace('/', '%2F')
+    response = requests.get("https://api.scryfall.com/cards/search?q="+cardname)
     if response.ok:
         time.sleep(0.1)
         content = json.loads(response.content)["data"][0]
