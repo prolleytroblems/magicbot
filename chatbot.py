@@ -97,7 +97,7 @@ def insultar_gnomo(reply_token, access_token, *args, **kwargs):
     else:
         return Response()
 
-def insultar_cadu():
+def insultar_cadu(reply_token, access_token, *args, **kwargs):
     if random.random()>0.7:
         text_reply(random.choice(NO_CHIN), reply_token, access_token)
     else:
