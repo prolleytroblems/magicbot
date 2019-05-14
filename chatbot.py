@@ -133,7 +133,7 @@ def get_card(cardname):
                     uris = face["image_uris"]
                     found = True
             if not found:
-                uris = content['card_faces'][0][image_uris]
+                uris = content['card_faces'][0]['image_uris']
     else:
         print(response.content)
         return None
