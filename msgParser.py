@@ -4,7 +4,7 @@ PATTERNS = {
     'cube': r'bot.*(cube|cubo)',
     'draft': r'bot.*(draft)',
     'card': r"\[([\w ]*?)\]",
-    'gnomo': r'gnomo'
+    'gnomo': r'gnomo',
     'goodbot': r'good.*bot'
 }
 
