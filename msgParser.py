@@ -17,6 +17,7 @@ MACROS = {}
 
 def parse_text(text):
     #patterndict is a dict of obj: patterns, outputs obj: result from re
+    print('macros', MACROS)
     for macro in MACROS:
         text = re.sub(macro, MACROS[macro], text)
 
@@ -31,3 +32,4 @@ def parse_text(text):
 
 def set_macro(input):
     MACROS[input[0]] = input[1]
+    return "Set macro: '{}' -> '{}' \n"
