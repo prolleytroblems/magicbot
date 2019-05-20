@@ -20,7 +20,7 @@ def parse_text(text):
     print('macros', MACROS)
     extra_text=''
     for macro in MACROS:
-        extra_text += re.findall(macro, MACROS[macro], text)+' '
+        extra_text += len(re.findall(macro, text))*MACROS[macro]+' '
 
     text = text.lower()
 
