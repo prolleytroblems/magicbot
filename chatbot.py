@@ -6,11 +6,9 @@ import json
 from flask import Response
 from werkzeug.exceptions import Unauthorized
 
-from msgParser import parse_text
-from linednd import roll
+from msgParser import *
 from calls import *
 from mtg import *
-from commfuncs import *
 
 
 def verify_source(body_bytestr, headers, channel_secret):
@@ -21,10 +19,13 @@ def verify_source(body_bytestr, headers, channel_secret):
 
 def message(event, headers, access_token):
     assert event['type']=='message'
-
     reply_token = event['replyToken']
     message = event['message']['text']
 
+    process_msg(message, reply_token, access_token)
+
+
+def process_msg(message, reply_token, access_token, **kwargs):
     functions = {
         'cube': (text_reply, (CUBE_URL, reply_token, access_token)),
         'draft': (text_reply, (DRAFT_URL, reply_token, access_token)),
@@ -32,11 +33,12 @@ def message(event, headers, access_token):
         'gnomo': (insultar_gnomo, (reply_token, access_token)),
         'goodbot': (good_bot, (reply_token, access_token)),
         'cadu': (insultar_cadu, (reply_token, access_token)),
-        'roll': (roll_dice, (reply_token, access_token))
+        'roll': (roll_dice, (reply_token, access_token)),
+        'macro': (macro, (reply_token, access_token))
     }
 
-    results = parse_text(message)
+    results = parse_text(message, **kwargs)
     print(results)
 
     for job in results:
-        functions[job][0](*functions[job][1], inputs=results[job])
+        functions[job][0](*functions[job][1], inputs=results[job], **kwargs)

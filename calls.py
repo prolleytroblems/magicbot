@@ -4,6 +4,7 @@ import random
 from commfuncs import *
 from mtg import *
 from linednd import *
+from msgParser import set_macro
 
 
 NO_CHIN = [
@@ -48,6 +49,10 @@ def roll_dice(reply_token, access_token, inputs, *args, **kwargs):
     for params in inputs:
         msgs.append(text_msg(roll(params)))
     send_reply(msgs, reply_token, access_token, *args, **kwargs)
+
+def macro(reply_token, access_token, inputs):
+    for input in inputs:
+        set_macro(input)
 
 def follow():
     pass
