@@ -33,5 +33,5 @@ def set_macro(inputs):
     for input in inputs:
         full[input[0].lower()] = input[1].lower()
         out += "Set macro: '{}' -> '{}' \n".format(input[0], input[1])
-    json.dump(open('macros.txt', 'w'))
+    json.dump(full, open('macros.txt', 'w'))
     return out
