@@ -5,6 +5,14 @@ from commfuncs import *
 from mtg import *
 from linednd import *
 
+
+NO_CHIN = [
+    'https://i.kym-cdn.com/entries/icons/original/000/021/465/1476153817501.jpg',
+    'https://upload.wikimedia.org/wikipedia/en/5/56/Mr_Burns.png',
+    'https://vignette.wikia.nocookie.net/lifeofheroesrp/images/8/82/Ed.png/revision/latest?cb=20130413184918',
+    'https://vignette.wikia.nocookie.net/fairlyoddfanon/images/3/30/DENZEL_COCKER.jpg/revision/latest/scale-to-width-down/173?cb=20120610053046'
+]
+
 def insultar_gnomo(reply_token, access_token, *args, **kwargs):
     if random.random()>0.6:
         insultos=['cocozento', 'cheirador de cueca', 'gordo', 'gnomeu', 'Paris Hilton', 'boiola', 'fedorento', 'o pior jogador de magic',
@@ -25,10 +33,15 @@ def cardsearch(reply_token, access_token, inputs, *args, **kwargs):
     print(inputs)
     msgs = []
     for input in inputs:
-        image = get_card(input)
-        if image is None:
-            msgs.append(image_msg(image))
-    send_reply(msgs, reply_token, access_token, *args, **kwargs)
+        try:
+            image = get_card(input)
+            if image is None:
+                msgs.append(image_msg(image))
+        except Exception as E:
+            print(E)
+    if len(msgs)>0:
+        print(msgs)
+        send_reply(msgs, reply_token, access_token, *args, **kwargs)
 
 def follow():
     pass

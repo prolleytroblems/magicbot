@@ -29,4 +29,5 @@ def get_card(cardname):
 
     image_url = uris["large"]
     preview_url = uris["small"]
+    print(uris)
     return (image_url, preview_url)

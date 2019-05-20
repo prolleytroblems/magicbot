@@ -13,13 +13,6 @@ from mtg import *
 from commfuncs import *
 
 
-NO_CHIN = [
-    'https://i.kym-cdn.com/entries/icons/original/000/021/465/1476153817501.jpg',
-    'https://upload.wikimedia.org/wikipedia/en/5/56/Mr_Burns.png',
-    'https://vignette.wikia.nocookie.net/lifeofheroesrp/images/8/82/Ed.png/revision/latest?cb=20130413184918',
-    'https://vignette.wikia.nocookie.net/fairlyoddfanon/images/3/30/DENZEL_COCKER.jpg/revision/latest/scale-to-width-down/173?cb=20120610053046'
-]
-
 def verify_source(body_bytestr, headers, channel_secret):
     hash = hmac.new(channel_secret.encode('utf-8'), body_bytestr, hashlib.sha256).digest()
     signature = base64.b64encode(hash)
