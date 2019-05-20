@@ -15,10 +15,10 @@ PATTERNS = {
 MACROS = {}
 
 
-def parse_text(text, macros_patterns = None):
+def parse_text(text):
     #patterndict is a dict of obj: patterns, outputs obj: result from re
-    for macro in macros_patterns:
-        text = re.sub(macro, macros_patterns[macro], text)
+    for macro in MACROS:
+        text = re.sub(macro, MACROS[macro], text)
 
     text = text.lower()
     out = {}
@@ -30,4 +30,4 @@ def parse_text(text, macros_patterns = None):
 
 
 def set_macro(input):
-    macros[input[0]] = input[1]    
+    MACROS[input[0]] = input[1]
