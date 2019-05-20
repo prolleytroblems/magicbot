@@ -27,7 +27,7 @@ def cardsearch(reply_token, access_token, inputs, *args, **kwargs):
     for input in inputs:
         image = get_card(input)
         if image is None:
-        msgs.append(image_msg(image))
+            msgs.append(image_msg(image))
     send_reply(msgs, reply_token, access_token, *args, **kwargs)
 
 def follow():
