@@ -1,6 +1,7 @@
 import random
 
 def roll(rollargs):
+    print(rollargs)
     out = 0
     if rollargs[0]=='':
         rollargs[0]=1
