@@ -1,15 +1,34 @@
 import random
 
 def roll(rollargs):
-    rollargs = list(rollargs)
-    if rollargs[0]=='':
-        rollargs[0]=1
+    args = []
+
+    for i in rollargs:
+        try:
+            args.append(int(i))
+        except ValueError as E:
+            args.append(i)
+    if args[0]=='':
+        args[0]=1
 
     out = 0
-    for _ in range(int(rollargs[0])):
-        out += int(random.random()*int(rollargs[1]))+1
+    for _ in range(rollargs[0]):
+        out += random.random()*rollargs[1]+1
+
+    special = None
+
+    if args[1]==20:
+        if out == 20:
+            special = 'Critical success!'
+        elif out == 1:
+            special = 'Critical FAILURE!'
+
     if rollargs[3] == '+':
         out = out + int(rollargs[4])
     elif rollargs[3] == '-':
         out = out - int(rollargs[4])
-    return out
+
+    if special is None:
+        return out
+    else:
+        return special + str(out)
