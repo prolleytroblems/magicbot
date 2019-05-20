@@ -40,7 +40,7 @@ def process_msg(message, reply_token, access_token, **kwargs):
     results = parse_text(message, **kwargs)
     print(results)
 
-    if ['macro'] in results:
+    if 'macro' in results:
         macro(*functions['macro'][1], inputs=results['macro'], **kwargs)
     else:
         for job in results:
