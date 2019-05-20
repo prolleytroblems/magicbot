@@ -13,7 +13,7 @@ def roll(rollargs):
 
     out = 0
     for _ in range(args[0]):
-        out += random.random()*args[1]+1
+        out += int(random.random()*args[1])+1
 
     special = None
     if args[1]==20:
