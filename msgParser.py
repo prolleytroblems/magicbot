@@ -7,6 +7,7 @@ PATTERNS = {
     'gnomo': r'gnomo',
     'goodbot': r'good.*bot',
     'cadu': r'(cadu|kadu)'
+    'roll': r'([\d]{0,2})d([\d]{1,3})((\+|\-)(\d+))?'
 }
 
 def parse_text(text):
