@@ -14,15 +14,19 @@ PATTERNS = {
 
 def parse_text(text):
     #patterndict is a dict of obj: patterns, outputs obj: result from re
+    out = {}
+
     MACROS = json.load(open('macros.txt', 'r'))
     print('macros', MACROS)
+    extra_text=''
     for macro in MACROS:
-        text = re.sub(macro, MACROS[macro], text)
+        extra_text += re.findall(macro, MACROS[macro], text)+' '
 
     text = text.lower()
-    out = {}
+
     for thing in PATTERNS:
         results = re.findall(PATTERNS[thing], text)
+        results += re.findall(PATTERNS[thing], extra_text)
         if len(results) >0:
             out[thing]= results
     return out
@@ -31,7 +35,7 @@ def set_macro(inputs):
     full = json.load(open('macros.txt', 'r'))
     out = ''
     for input in inputs:
-        full[input[0].lower()] = input[1].lower()
+        full[input[0]] = input[1]
         out += "Set macro: '{}' -> '{}' \n".format(input[0], input[1])
     json.dump(full, open('macros.txt', 'w'))
     return out
