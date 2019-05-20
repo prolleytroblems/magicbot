@@ -40,5 +40,8 @@ def process_msg(message, reply_token, access_token, **kwargs):
     results = parse_text(message, **kwargs)
     print(results)
 
-    for job in results:
-        functions[job][0](*functions[job][1], inputs=results[job], **kwargs)
+    if ['macro'] in results:
+        macro(*functions['macro'][1], inputs=results['macro'], **kwargs)
+    else:
+        for job in results:
+            functions[job][0](*functions[job][1], inputs=results[job], **kwargs)
