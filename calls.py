@@ -47,7 +47,7 @@ def roll_dice(reply_token, access_token, inputs, *args, **kwargs):
     msgs = []
     for params in inputs:
         msgs.append(text_msg(roll(params)))
-    send_reply(msgs, reply_token, access_token, *argsm, **kwargs)
+    send_reply(msgs, reply_token, access_token, *args, **kwargs)
 
 def follow():
     pass
