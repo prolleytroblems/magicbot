@@ -31,7 +31,8 @@ def message(event, headers, access_token):
         'card': (cardsearch, (reply_token, access_token)),
         'gnomo': (insultar_gnomo, (reply_token, access_token)),
         'goodbot': (good_bot, (reply_token, access_token)),
-        'cadu': (insultar_cadu, (reply_token, access_token))
+        'cadu': (insultar_cadu, (reply_token, access_token)),
+        'roll': (roll_dice, (reply_token, access_token))
     }
 
     results = parse_text(message)

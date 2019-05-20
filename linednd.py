@@ -2,10 +2,12 @@ import random
 
 def roll(rollargs):
     out = 0
-    for _ in range(rollargs[0]):
-        out += int(random.random()*rollargs[1])+1
-    if rollargs[3] == '+':
-        out = out + rollargs[4]
-    elif rollargs[3] == '-':
-        out = out - rollargs[4]
+    if rollargs[0]==''
+        rollargs[0]=1
+    for _ in range(int(rollargs[0])):
+        out += int(random.random()*int(rollargs[1]))+1
+    if int(rollargs[3]) == '+':
+        out = out + int(rollargs[4])
+    elif int(rollargs[3]) == '-':
+        out = out - int(rollargs[4])
     return out

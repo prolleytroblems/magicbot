@@ -35,13 +35,19 @@ def cardsearch(reply_token, access_token, inputs, *args, **kwargs):
     for input in inputs:
         try:
             image = get_card(input)
-            if image is None:
+            if image is not None:
                 msgs.append(image_msg(image))
         except Exception as E:
             print(E)
     if len(msgs)>0:
         print(msgs)
         send_reply(msgs, reply_token, access_token, *args, **kwargs)
+
+def roll_dice(reply_token, access_token, inputs, *args, **kwargs):
+    msgs = []
+    for params in inputs:
+        msgs.append(text_msg(roll(params)))
+    send_reply(msgs, reply_token, access_token, *argsm, **kwargs)
 
 def follow():
     pass
