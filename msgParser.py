@@ -8,7 +8,7 @@ PATTERNS = {
     'goodbot': r'good.*bot',
     'cadu': r'(cadu|kadu)',
     'roll': r'([\d]{0,2})d([\d]{1,3})((\+|\-)(\d+))?',
-    'macro': r'<\w*?:\w*?>'
+    'macro': r'<(\w*?):(\w*?)>'
 }
 
 
@@ -31,5 +31,5 @@ def parse_text(text):
 
 
 def set_macro(input):
-    MACROS[input[0]] = input[1]
+    MACROS[input[0].lower()] = input[1].lower()
     return "Set macro: '{}' -> '{}' \n"
