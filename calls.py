@@ -15,14 +15,14 @@ NO_CHIN = [
 ]
 
 def insultar_gnomo(reply_token, access_token, **kwargs):
-    if random.random()>0.6:
+    if random.random()>0.75:
         insultos=['cocozento', 'cheirador de cueca', 'gordo', 'gnomeu', 'Paris Hilton', 'boiola', 'fedorento', 'o pior jogador de magic',
                     'cheira-cola', 'sem-vergonha', 'descascador de batata', 'eletricista', 'bobao', 'pau no cu', 'babaca', 'vacilao',
                     'baka', 'kisama', 'pumpunzento', 'mago verde']
         text_reply('You wrote: "gnomo". Did you mean: "'+random.choice(insultos)+'"?.', reply_token, access_token)
 
 def insultar_cadu(reply_token, access_token, **kwargs):
-    if random.random()>0.7:
+    if random.random()>0.8:
         text_reply(random.choice(NO_CHIN), reply_token, access_token)
 
 def good_bot(reply_token, access_token, **kwargs):
