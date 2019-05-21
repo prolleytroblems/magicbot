@@ -15,14 +15,14 @@ NO_CHIN = [
 ]
 
 def insultar_gnomo(reply_token, access_token, **kwargs):
-    if random.random()>0.75:
+    if random.random()>0.95:
         insultos=['cocozento', 'cheirador de cueca', 'gordo', 'gnomeu', 'Paris Hilton', 'boiola', 'fedorento', 'o pior jogador de magic',
                     'cheira-cola', 'sem-vergonha', 'descascador de batata', 'eletricista', 'bobao', 'pau no cu', 'babaca', 'vacilao',
                     'baka', 'kisama', 'pumpunzento', 'mago verde']
         text_reply('You wrote: "gnomo". Did you mean: "'+random.choice(insultos)+'"?.', reply_token, access_token)
 
 def insultar_cadu(reply_token, access_token, **kwargs):
-    if random.random()>0.8:
+    if random.random()>0.95:
         text_reply(random.choice(NO_CHIN), reply_token, access_token)
 
 def good_bot(reply_token, access_token, **kwargs):
@@ -33,11 +33,15 @@ def good_bot(reply_token, access_token, **kwargs):
 def cardsearch(reply_token, access_token, inputs, **kwargs):
     print(inputs)
     msgs = []
+    n=0
     for input in inputs:
         try:
             image = get_card(input)
             if image is not None:
                 msgs.append(image_msg(image))
+                n+=1
+            if n==5:
+                break
         except Exception as E:
             print(E)
     if len(msgs)>0:

@@ -12,17 +12,17 @@ PATTERNS = {
     'macro': r'<(.*?):(.*?)>'
 }
 
+#add: reset macros, show all macros, titles on macros, make different functions add to the same reply
+
 def parse_text(text):
     #patterndict is a dict of obj: patterns, outputs obj: result from re
     out = {}
+    text = text.lower()
 
     MACROS = json.load(open('macros.txt', 'r'))
-    print('macros', MACROS)
     extra_text=''
     for macro in MACROS:
         extra_text += len(re.findall(macro, text))*MACROS[macro]+' '
-
-    text = text.lower()
 
     for thing in PATTERNS:
         results = re.findall(PATTERNS[thing], text)
