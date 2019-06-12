@@ -14,23 +14,23 @@ NO_CHIN = [
     'https://vignette.wikia.nocookie.net/fairlyoddfanon/images/3/30/DENZEL_COCKER.jpg/revision/latest/scale-to-width-down/173?cb=20120610053046'
 ]
 
-def insultar_gnomo(reply_token, access_token, **kwargs):
+def insultar_gnomo(*args, **kwargs):
     if random.random()>0.95:
         insultos=['cocozento', 'cheirador de cueca', 'gordo', 'gnomeu', 'Paris Hilton', 'boiola', 'fedorento', 'o pior jogador de magic',
                     'cheira-cola', 'sem-vergonha', 'descascador de batata', 'eletricista', 'bobao', 'pau no cu', 'babaca', 'vacilao',
                     'baka', 'kisama', 'pumpunzento', 'mago verde']
-        text_reply('You wrote: "gnomo". Did you mean: "'+random.choice(insultos)+'"?.', reply_token, access_token)
+        return('You wrote: "gnomo". Did you mean: "'+random.choice(insultos)+'"?.')
 
-def insultar_cadu(reply_token, access_token, **kwargs):
+def insultar_cadu(*args, **kwargs):
     if random.random()>0.95:
-        text_reply(random.choice(NO_CHIN), reply_token, access_token)
+        return(random.choice(NO_CHIN))
 
-def good_bot(reply_token, access_token, **kwargs):
+def good_bot(*args, **kwargs):
     if random.random()>0.5:
         respostas = ['vsf seu arrombado, boa é sua mãe', 'brigado <3', 'valeu broder', 'prefiro uma nota de 20 que sua gratidão']
-        text_reply(random.choice(respostas), reply_token, access_token)
+        return(random.choice(respostas))
 
-def cardsearch(reply_token, access_token, inputs, **kwargs):
+def cardsearch(inputs, *args, **kwargs):
     print(inputs)
     msgs = []
     n=0
@@ -46,17 +46,14 @@ def cardsearch(reply_token, access_token, inputs, **kwargs):
             print(E)
     if len(msgs)>0:
         print(msgs)
-        send_reply(msgs, reply_token, access_token, **kwargs)
+        return(msgs)
 
-def roll_dice(reply_token, access_token, inputs, **kwargs):
-    msgs = []
-    for params in inputs:
-        msgs.append(text_msg(roll(params)))
-    send_reply(msgs, reply_token, access_token, **kwargs)
+def roll_dice(inputs, *args, **kwargs):
+    return('\n'.join([roll(params for params in inputs)]))
 
-def macro(reply_token, access_token, inputs, **kwargs):
+def macro(inputs, **kwargs):
     out = set_macro(inputs)
-    send_reply([text_msg(out)], reply_token, access_token, **kwargs)
+    return(out)
 
 def follow():
     pass

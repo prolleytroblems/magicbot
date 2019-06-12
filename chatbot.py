@@ -9,6 +9,7 @@ from werkzeug.exceptions import Unauthorized
 from msgParser import *
 from calls import *
 from mtg import *
+from commfuncs import text_msg, send_reply
 
 
 def verify_source(body_bytestr, headers, channel_secret):
@@ -27,20 +28,35 @@ def message(event, headers, access_token):
 
 def process_msg(message, reply_token, access_token, **kwargs):
     functions = {
-        'cube': (text_reply, (CUBE_URL, reply_token, access_token)),
-        'draft': (text_reply, (DRAFT_URL, reply_token, access_token)),
-        'card': (cardsearch, (reply_token, access_token)),
-        'gnomo': (insultar_gnomo, (reply_token, access_token)),
-        'goodbot': (good_bot, (reply_token, access_token)),
-        'cadu': (insultar_cadu, (reply_token, access_token)),
-        'roll': (roll_dice, (reply_token, access_token)),
-        'macro': (macro, (reply_token, access_token))
+        'cube': (text_reply, (CUBE_URL)),
+        'draft': (text_reply, (DRAFT_URL)),
+        'card': (cardsearch, (,)),
+        'gnomo': (insultar_gnomo, (,)),
+        'goodbot': (good_bot, (,)),
+        'cadu': (insultar_cadu, ,)),
+        'roll': (roll_dice, (,)),
+        'macro': (macro, (,))
     }
 
     results = parse_text(message, **kwargs)
     print(results)
 
+    out = []
+    messages = []
     order = ['macro','roll','card','cube','draft','gnomo','cadu','goodbot']
     for job in order:
         if job in results:
-            functions[job][0](*functions[job][1], inputs=results[job], **kwargs)
+            r = functions[job][0](*functions[job][1], inputs=results[job], **kwargs)
+            if isinstance(r,str):
+                out.append(r)
+            else:
+                if isinstance(r, list):
+                    messages += r
+                elif isinstance(r, dict):
+                    messages.append(r)
+                else:
+                    raise TypeError('Something wrong with the call func output')
+
+    out = '\n'.join(out)
+    messages.append(text_msg(out))
+    send_reply(messages, replyToken, access_token)
