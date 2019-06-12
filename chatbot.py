@@ -59,4 +59,4 @@ def process_msg(message, reply_token, access_token, **kwargs):
 
     out = '\n'.join(out)
     messages.append(text_msg(out))
-    send_reply(messages, replyToken, access_token)
+    send_reply(messages, reply_token, access_token)
