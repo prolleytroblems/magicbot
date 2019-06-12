@@ -30,12 +30,12 @@ def process_msg(message, reply_token, access_token, **kwargs):
     functions = {
         'cube': (text_reply, (CUBE_URL)),
         'draft': (text_reply, (DRAFT_URL)),
-        'card': (cardsearch, (,)),
-        'gnomo': (insultar_gnomo, (,)),
-        'goodbot': (good_bot, (,)),
-        'cadu': (insultar_cadu, ,)),
-        'roll': (roll_dice, (,)),
-        'macro': (macro, (,))
+        'card': (cardsearch, ()),
+        'gnomo': (insultar_gnomo, ()),
+        'goodbot': (good_bot, ()),
+        'cadu': (insultar_cadu, ())),
+        'roll': (roll_dice, ()),
+        'macro': (macro, ())
     }
 
     results = parse_text(message, **kwargs)
