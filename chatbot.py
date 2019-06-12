@@ -40,8 +40,7 @@ def process_msg(message, reply_token, access_token, **kwargs):
     results = parse_text(message, **kwargs)
     print(results)
 
-    if 'macro' in results:
-        macro(*functions['macro'][1], inputs=results['macro'], **kwargs)
-    else:
-        for job in results:
+    order = ['macro','roll','card','cube','draft','gnomo','cadu','goodbot']
+    for job in order:
+        if job in results:
             functions[job][0](*functions[job][1], inputs=results[job], **kwargs)
