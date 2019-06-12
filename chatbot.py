@@ -53,6 +53,8 @@ def process_msg(message, reply_token, access_token, **kwargs):
                 messages += r
             elif isinstance(r, dict):
                 messages.append(r)
+            elif r is None:
+                pass
             else:
                 raise TypeError('Something wrong with the call func output')
 
