@@ -33,7 +33,7 @@ def process_msg(message, reply_token, access_token, **kwargs):
         'card': (cardsearch, ()),
         'gnomo': (insultar_gnomo, ()),
         'goodbot': (good_bot, ()),
-        'cadu': (insultar_cadu, ())),
+        'cadu': (insultar_cadu, ()),
         'roll': (roll_dice, ()),
         'macro': (macro, ())
     }
