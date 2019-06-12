@@ -18,9 +18,9 @@ def roll(rollargs):
     special = None
     if args[1]==20:
         if out == 20:
-            special = 'Critical success!'
+            special = 'Critical success! '
         elif out == 1:
-            special = 'Critical FAILURE!'
+            special = 'Critical FAILURE! '
 
     if rollargs[3] == '+':
         out = out + args[4]

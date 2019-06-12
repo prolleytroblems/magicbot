@@ -49,7 +49,7 @@ def cardsearch(inputs, *args, **kwargs):
         return(msgs)
 
 def roll_dice(inputs, *args, **kwargs):
-    return('\n'.join([roll(params for params in inputs)]))
+    return('\n'.join([roll(params) for params in inputs]))
 
 def macro(inputs, **kwargs):
     out = set_macro(inputs)
