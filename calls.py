@@ -4,7 +4,7 @@ import random
 from commfuncs import *
 from mtg import *
 from linednd import *
-from msgParser import set_macro
+from msgParser import set_macro, parse_text
 
 
 NO_CHIN = [
@@ -66,6 +66,9 @@ def macro(inputs, *args, **kwargs):
 
 def echo(inputs, *args, **kwargs):
     return(inputs[1])
+
+def dndparse(inputs, *args, **kwargs):
+    return parse_text([text.strip() for text in inputs[0].split(';')], patterns='dnd')
 
 def follow():
     pass

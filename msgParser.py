@@ -37,13 +37,13 @@ def parse_text(text, patterns = 'normal'):
             newtext = text[:start]+MACROS[macro]+text[end:]
             return parse_text(newtext)
 
-    if patterns = 'normal':
+    if patterns == 'normal':
         patpats = PATTERNS
-    elif patterns = 'dnd':
+    elif patterns == 'dnd':
         patpats = DND_PATTERNS
     else:
         raise ValueError()
-        
+
     for thing in patpats:
         results = re.findall(patpats[thing], text)
         results += re.findall(patpats[thing], extra_text)
