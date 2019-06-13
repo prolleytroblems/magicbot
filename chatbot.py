@@ -49,7 +49,7 @@ def process_msg(reply_token, access_token, inputs, **kwargs):
         'clear': (clear, ()),
         'clear_all': (clearall, ()),
         'roll_long': (roll_long, ()),
-        'dnd': (dndprocess, (reply_token, access_token))
+        'dnd': (dndprocess, (reply_token, access_token, process_msg))
     }
 
     results = parse_text(inputs, **kwargs)
