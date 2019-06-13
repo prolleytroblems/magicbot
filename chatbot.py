@@ -58,7 +58,7 @@ def process_msg(reply_token, access_token, inputs, **kwargs):
     messages = []
     for job, inputs in results:
         r = functions[job][0](*functions[job][1], inputs=inputs, **kwargs)
-        print("Function: {}, outputs: {}".format(job.__name__, r))
+        print("Function: {}, outputs: {}".format(job, r))
         if isinstance(r, str):
             out.append(r)
         elif isinstance(r, list):
