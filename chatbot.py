@@ -26,7 +26,7 @@ def message(event, headers, access_token):
     return_msg(message, reply_token, access_token)
 
 def return_msg(message, reply_token, access_token, **kwargs):
-    out, messages = process_msg(messages, reply_token, access_token, **kwargs)
+    out, messages = process_msg(message, reply_token, access_token, **kwargs)
     messages.append(text_msg(out))
     send_reply(messages, reply_token, access_token)
 
@@ -46,7 +46,7 @@ def process_msg(message, reply_token, access_token, **kwargs):
         'clear': (clear, ()),
         'clear_all': (clearall, ()),
         'roll_long': (roll_long, ()),
-        'dnd': (dndprocess, ())
+        'dnd': (process_msg, ())
     }
 
     results = parse_text(message, **kwargs)
