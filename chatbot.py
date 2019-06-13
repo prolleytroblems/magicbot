@@ -23,10 +23,10 @@ def message(event, headers, access_token):
     reply_token = event['replyToken']
     message = event['message']['text']
 
-    return_msg(message, reply_token, access_token)
+    return_msg(reply_token, access_token, message)
 
-def return_msg(message, reply_token, access_token, **kwargs):
-    out, messages = process_msg(message, reply_token, access_token, **kwargs)
+def return_msg(reply_token, access_token, message, **kwargs):
+    out, messages = process_msg(reply_token, access_token, message, **kwargs)
     messages.append(text_msg(out))
     send_reply(reply_token, access_token, messages)
 

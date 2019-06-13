@@ -4,7 +4,7 @@ import json
 def text_reply(text, *args, **kwargs):
     send_reply([text_msg(text)], *args, **kwargs)
 
-def send_reply(messages, reply_token, access_token, *args, **kwargs):
+def send_reply(reply_token, access_token, messages, *args, **kwargs):
     assert isinstance(messages, list)
     headers = {
         'Authorization': 'Bearer '+access_token,
