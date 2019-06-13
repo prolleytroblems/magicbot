@@ -32,7 +32,7 @@ def return_msg(reply_token, access_token, message, **kwargs):
     print("Sending... {}".format(messages))
     send_reply(reply_token, access_token, messages)
 
-def process_msg(reply_token, access_token, inputs, **kwargs):
+def process_msg(reply_token, access_token, inputs, join_char = '\n'**kwargs):
     functions = {
         'cube': (echo_args, (CUBE_URL)),
         'draft': (echo_args, (DRAFT_URL)),

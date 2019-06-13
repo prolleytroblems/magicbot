@@ -45,9 +45,6 @@ def cardsearch(inputs, *args, **kwargs):
     if len(msgs)>0:
         return(msgs)
 
-def roll_long(inputs, *args, **kwargs):
-    return str(roll(inputs[1:]))
-
 def roll_dice(inputs, *args, **kwargs):
     return('\n'.join([str(roll(params)) for params in inputs]))
 
@@ -68,10 +65,10 @@ def dndprocess(reply_token, access_token, process_msg, inputs, *args, **kwargs):
     outs = []
     messages = []
     for text in inputs.split(';'):
-        out, message = process_msg(reply_token, access_token, text.strip(), patterns='dnd')
+        out, message = process_msg(reply_token, access_token, text.strip(), join_char=' ', patterns='dnd')
         outs.append(out)
         messages += messages
-    return('\n'.join(outs), messages)
+    return(' '.join(outs), messages)
 
 def echo_args(*args, **kwargs):
     return ''.join(args)

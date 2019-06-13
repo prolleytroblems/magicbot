@@ -8,8 +8,7 @@ PATTERNS = {
     'gnomo': r'gnomo',
     'goodbot': r'good.*bot',
     'cadu': r'(cadu|kadu)',
-    'dnd': r'<(.*?)>',
-    'roll': r'([\d]{0,2})d([\d]{1,3})((\+|\-)(\d+))?'
+    'dnd': r'<(.*?)>'
 }
 
 DND_PATTERNS = {
@@ -18,7 +17,7 @@ DND_PATTERNS = {
     'echo':'!e(cho)? (.+)',
     'clear':'!c(lear)? (.+)',
     'clear_all':'!clearall',
-    'roll_long': r'!r(oll)? ([\d]{0,2})d([\d]{1,3})((\+|\-)(\d+))?',
+    'roll': r'([\d]{0,2})d([\d]{1,3})((\+|\-)(\d+))?',
 
 }
 #add: reset macros, show all macros, titles on macros, make different functions add to the same reply
