@@ -28,9 +28,9 @@ def message(event, headers, access_token):
 def return_msg(message, reply_token, access_token, **kwargs):
     out, messages = process_msg(message, reply_token, access_token, **kwargs)
     messages.append(text_msg(out))
-    send_reply(messages, reply_token, access_token)
+    send_reply(reply_token, access_token, messages)
 
-def process_msg(message, reply_token, access_token, **kwargs):
+def process_msg(reply_token, access_token, inputs, **kwargs):
     functions = {
         'cube': (text_reply, (CUBE_URL)),
         'draft': (text_reply, (DRAFT_URL)),
@@ -46,10 +46,10 @@ def process_msg(message, reply_token, access_token, **kwargs):
         'clear': (clear, ()),
         'clear_all': (clearall, ()),
         'roll_long': (roll_long, ()),
-        'dnd': (process_msg, ())
+        'dnd': (process_msg, (reply_token, access_token))
     }
 
-    results = parse_text(message, **kwargs)
+    results = parse_text(inputs, **kwargs)
     print(results)
 
     out = []
@@ -68,4 +68,5 @@ def process_msg(message, reply_token, access_token, **kwargs):
             raise TypeError('Something wrong with the call func output')
 
     out = '\n'.join(out)
+    print(out, messages)
     return (out, messages)
