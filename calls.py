@@ -52,6 +52,7 @@ def roll_long(inputs, *args, **kwargs):
     return str(roll(inputs[1:]))
 
 def roll_dice(inputs, *args, **kwargs):
+    print(inputs, args, kwargs)
     return('\n'.join([str(roll(params)) for params in inputs]))
 
 def echo(inputs, *args, **kwargs):
