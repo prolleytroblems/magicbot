@@ -27,8 +27,9 @@ def message(event, headers, access_token):
 
 def return_msg(reply_token, access_token, message, **kwargs):
     out, messages = process_msg(reply_token, access_token, message, **kwargs)
-    messages.append(text_msg(out))
-    print(messages)
+    if len(out)>0:
+        messages.append(text_msg(out))
+    print (messages)
     send_reply(reply_token, access_token, messages)
 
 def process_msg(reply_token, access_token, inputs, **kwargs):
@@ -63,11 +64,14 @@ def process_msg(reply_token, access_token, inputs, **kwargs):
             messages += r
         elif isinstance(r, dict):
             messages.append(r)
+        elif r is tuple:
+            if len(out)>0:
+                out.append(r[0])
+            messages+=r[1]
         elif r is None:
             pass
         else:
             raise TypeError('Something wrong with the call func output')
 
     out = '\n'.join(out)
-    print(out, messages)
     return (out, messages)

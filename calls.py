@@ -31,7 +31,6 @@ def good_bot(*args, **kwargs):
         return(random.choice(respostas))
 
 def cardsearch(inputs, *args, **kwargs):
-    print(inputs)
     msgs = []
     n=0
     try:
@@ -40,12 +39,10 @@ def cardsearch(inputs, *args, **kwargs):
             msgs.append(image_msg(image))
             n+=1
         if n==5:
-            print(msgs)
             return(msgs)
     except Exception as E:
         print(E)
     if len(msgs)>0:
-        print(msgs)
         return(msgs)
 
 def roll_long(inputs, *args, **kwargs):
