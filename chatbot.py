@@ -47,7 +47,6 @@ def process_msg(reply_token, access_token, inputs, join_char = '\n', **kwargs):
         'set_var': (set_var, ()),
         'clear': (clear, ()),
         'clear_all': (clearall, ()),
-        'roll_long': (roll_long, ()),
         'dnd': (dndprocess, (reply_token, access_token, process_msg))
     }
 
