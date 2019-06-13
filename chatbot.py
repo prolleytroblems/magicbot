@@ -33,6 +33,7 @@ def return_msg(reply_token, access_token, message, **kwargs):
     send_reply(reply_token, access_token, messages)
 
 def process_msg(reply_token, access_token, inputs, **kwargs):
+    print(kwargs)
     functions = {
         'cube': (echo_args, (CUBE_URL)),
         'draft': (echo_args, (DRAFT_URL)),
@@ -48,7 +49,7 @@ def process_msg(reply_token, access_token, inputs, **kwargs):
         'clear': (clear, ()),
         'clear_all': (clearall, ()),
         'roll_long': (roll_long, ()),
-        'dnd': (process_msg, (reply_token, access_token))
+        'dnd': (dndprocess, (reply_token, access_token))
     }
 
     results = parse_text(inputs, **kwargs)
@@ -58,6 +59,7 @@ def process_msg(reply_token, access_token, inputs, **kwargs):
     messages = []
     for job, inputs in results:
         r = functions[job][0](*functions[job][1], inputs=inputs, **kwargs)
+        print(r)
         if isinstance(r, str):
             out.append(r)
         elif isinstance(r, list):

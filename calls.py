@@ -64,9 +64,9 @@ def macro(inputs, *args, **kwargs):
 def echo(inputs, *args, **kwargs):
     return(inputs[1])
 
-def dndprocess(inputs, *args, **kwargs):
+def dndprocess(reply_token, access_token, inputs, *args, **kwargs):
     print(inputs)
-    return [process_msg(text.strip(), patterns='dnd') for text in inputs.split(';')]
+    return [process_msg(reply_token, access_token, text.strip(), patterns='dnd') for text in inputs.split(';')]
 
 def echo_args(*args, **kwargs):
     return ''.join(args)
