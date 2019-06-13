@@ -8,11 +8,11 @@ PATTERNS = {
     'gnomo': r'gnomo',
     'goodbot': r'good.*bot',
     'cadu': r'(cadu|kadu)',
-    'dnd': r'<(.*?)>'
+    'dnd': r'<(.*?)>',
+    'set_macro':'!s(et)? (.+):"(.+?)"'
 }
 
 DND_PATTERNS = {
-    'set_macro':'!s(et)? (.+):"(.+)"',
     'set_var':'!v(ar)? (.+)',
     'echo':'!e(cho)? (.+)',
     'clear':'!c(lear)? (.+)',
