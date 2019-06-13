@@ -53,12 +53,11 @@ def parse_text(text, patterns = 'normal'):
 def set_macro(inputs, *args, **kwargs):
     full = json.load(open('macros.txt', 'r'))
     out = ''
-    for input in inputs:
-        if '#' not in input[2]:
-            full['#'+input[1].strip().lower()] = input[2]
-            out += "Set macro: '{}' -> '{}' \n".format(input[1], input[2])
-        else:
-            out += "No recursion: remove the # from your macro you sneaky shit. \n"
+    if '#' not in inputs[2]:
+        full['#'+inputs[1].strip().lower()] = inputs[2]
+        out += "Set macro: '{}' -> '{}' \n".format(inputs[1], inputs[2])
+    else:
+        out += "No recursion: remove the # from your macro you sneaky shit. \n"
     json.dump(full, open('macros.txt', 'w'))
     return out
 

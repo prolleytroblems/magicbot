@@ -73,5 +73,5 @@ def process_msg(reply_token, access_token, inputs, join_char = '\n', **kwargs):
         else:
             raise TypeError('Something wrong with the call func output')
 
-    out = '\n'.join(out)
+    out = join_char.join(out)
     return (out, messages)
