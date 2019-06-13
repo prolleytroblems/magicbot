@@ -40,7 +40,8 @@ def cardsearch(inputs, *args, **kwargs):
             msgs.append(image_msg(image))
             n+=1
         if n==5:
-            break
+            print(msgs)
+            return(msgs)
     except Exception as E:
         print(E)
     if len(msgs)>0:
@@ -66,8 +67,8 @@ def macro(inputs, *args, **kwargs):
 def echo(inputs, *args, **kwargs):
     return(inputs[1])
 
-def dndparse(inputs, *args, **kwargs):
-    return [parse_text(text.strip(), patterns='dnd') for text in inputs.split(';')]
+def dndprocess(inputs, *args, **kwargs):
+    return [process_msg(text.strip(), patterns='dnd') for text in inputs.split(';')]
 
 def set_var():
     pass
