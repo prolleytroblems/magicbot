@@ -12,7 +12,7 @@ PATTERNS = {
 }
 
 DND_PATTERNS = {
-    'set_macro':'!s(et)? (.+):(.+)',
+    'set_macro':'!s(et)? (.+):"(.+)"',
     'set_var':'!v(ar)? (.+)',
     'echo':'!e(cho)? (.+)',
     'clear':'!c(lear)? (.+)',
