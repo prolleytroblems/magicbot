@@ -70,6 +70,15 @@ def echo(inputs, *args, **kwargs):
 def dndparse(inputs, *args, **kwargs):
     return parse_text([text.strip() for text in inputs[0].split(';')], patterns='dnd')
 
+def set_var():
+    pass
+
+def clear():
+    pass
+
+def clearall():
+    pass
+
 def follow():
     pass
 

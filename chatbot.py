@@ -35,7 +35,14 @@ def process_msg(message, reply_token, access_token, **kwargs):
         'goodbot': (good_bot, ()),
         'cadu': (insultar_cadu, ()),
         'roll': (roll_dice, ()),
-        'macro': (macro, ())
+        'macro': (macro, ()),
+        'echo':,
+        'set_macro':,
+        'set_var':,
+        'clear':,
+        'clear_all':,
+        'roll_long':
+
     }
 
     results = parse_text(message, **kwargs)

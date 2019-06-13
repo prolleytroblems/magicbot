@@ -14,8 +14,8 @@ PATTERNS = {
 }
 
 DND_PATTERNS = {
-    'macro':'!s(et)? (.+):(.+)',
-    'var':'!v(ar)? (.+)',
+    'set_macro':'!s(et)? (.+):(.+)',
+    'set_var':'!v(ar)? (.+)',
     'echo':'!e(cho)? (.+)',
     'clear':'!c(lear)? (.+)',
     'clearall':'!clearall',
