@@ -48,6 +48,9 @@ def cardsearch(inputs, *args, **kwargs):
         print(msgs)
         return(msgs)
 
+def roll_long(inputs, *args, **kwargs):
+    return str(roll(inputs[1:]))
+
 def roll_dice(inputs, *args, **kwargs):
     return('\n'.join([str(roll(params)) for params in inputs]))
 
@@ -57,6 +60,9 @@ def echo(inputs, *args, **kwargs):
 def macro(inputs, *args, **kwargs):
     out = set_macro(inputs)
     return(out)
+
+def echo(inputs, *args, **kwargs):
+    return(inputs[1])
 
 def follow():
     pass

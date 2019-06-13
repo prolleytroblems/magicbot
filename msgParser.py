@@ -8,17 +8,18 @@ PATTERNS = {
     'gnomo': r'gnomo',
     'goodbot': r'good.*bot',
     'cadu': r'(cadu|kadu)',
-    'roll': r'([\d]{0,2})d([\d]{1,3})((\+|\-)(\d+))?',
     'dnd': r'<(.*?)>',
     'macro': '#(.*?) '
+    'roll': r'([\d]{0,2})d([\d]{1,3})((\+|\-)(\d+))?'
 }
 
 DND_PATTERNS = {
-    'macro':'!set ',
-    'var':'!var ',
-    'echo':'',
-    'clear':'',
-    'clearall':'',
+    'macro':'!s(et)? (.+):(.+)',
+    'var':'!v(ar)? (.+)',
+    'echo':'!e(cho)? (.+)',
+    'clear':'!c(lear)? (.+)',
+    'clearall':'!clearall',
+    'roll_long': r'!r(oll)? ([\d]{0,2})d([\d]{1,3})((\+|\-)(\d+))?',
 
 }
 #add: reset macros, show all macros, titles on macros, make different functions add to the same reply
@@ -44,14 +45,21 @@ def parse_text(text, patterns = PATTERNS):
 
     return out
 
-def set_macro(inputs):
+def set_macro(inputs, *args, **kwargs):
     full = json.load(open('macros.txt', 'r'))
     out = ''
     for input in inputs:
-        if '#' not in input[1]:
-            full['#'+input[0].strip().lower()] = input[1]
-            out += "Set macro: '{}' -> '{}' \n".format(input[0], input[1])
+        if '#' not in input[2]:
+            full['#'+input[1].strip().lower()] = input[2]
+            out += "Set macro: '{}' -> '{}' \n".format(input[1], input[2])
         else:
             out += "No recursion: remove the # from your macro you sneaky shit. \n"
     json.dump(full, open('macros.txt', 'w'))
     return out
+
+def clear_macro(inputs, *args, **kwargs):
+    return set_macro([(inputs[1])])
+
+def clear_all(*args, **kwargs):
+    json.dump({}, open('macros.txt', 'w'))
+    return "Macros cleared."
