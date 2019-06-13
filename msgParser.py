@@ -15,10 +15,10 @@ PATTERNS = {
 
 DND_PATTERNS = {
     'macro':'!set ',
-    'var':,'!var '
-    'echo':,
-    'clear':,
-    'clearall':,
+    'var':'!var ',
+    'echo':'',
+    'clear':'',
+    'clearall':'',
 
 }
 #add: reset macros, show all macros, titles on macros, make different functions add to the same reply
