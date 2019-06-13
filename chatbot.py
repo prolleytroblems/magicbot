@@ -34,14 +34,14 @@ def process_msg(message, reply_token, access_token, **kwargs):
         'gnomo': (insultar_gnomo, ()),
         'goodbot': (good_bot, ()),
         'cadu': (insultar_cadu, ()),
-        'roll': (roll_dice, ()),
+        'roll': (roll_once, ()),
         'macro': (macro, ()),
-        'echo':,
-        'set_macro':,
-        'set_var':,
-        'clear':,
-        'clear_all':,
-        'roll_long':
+        'echo': echo,
+        'set_macro': macro,
+        'set_var': set_var,
+        'clear': clear,
+        'clear_all': clearall,
+        'roll_long': roll_long
 
     }
 
