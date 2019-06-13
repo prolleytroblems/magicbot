@@ -23,8 +23,12 @@ def message(event, headers, access_token):
     reply_token = event['replyToken']
     message = event['message']['text']
 
-    process_msg(message, reply_token, access_token)
+    return_msg(message, reply_token, access_token)
 
+def return_msg(message, reply_token, access_token, **kwargs):
+    out, messages = process_msg(messages, reply_token, access_token, **kwargs)
+    messages.append(text_msg(out))
+    send_reply(messages, reply_token, access_token)
 
 def process_msg(message, reply_token, access_token, **kwargs):
     functions = {
@@ -40,9 +44,9 @@ def process_msg(message, reply_token, access_token, **kwargs):
         'set_macro': (macro, ()),
         'set_var': (set_var, ()),
         'clear': (clear, ()),
-        'clear_all': clearall,
-        'roll_long': roll_long
-
+        'clear_all': (clearall, ()),
+        'roll_long': (roll_long, ()),
+        'dnd': (dndparse, ())
     }
 
     results = parse_text(message, **kwargs)
@@ -64,5 +68,4 @@ def process_msg(message, reply_token, access_token, **kwargs):
             raise TypeError('Something wrong with the call func output')
 
     out = '\n'.join(out)
-    messages.append(text_msg(out))
-    send_reply(messages, reply_token, access_token)
+    return (out, messages)

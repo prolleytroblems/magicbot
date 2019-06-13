@@ -29,7 +29,6 @@ def parse_text(text, patterns = 'normal'):
     text = text.lower()
 
     MACROS = json.load(open('macros.txt', 'r'))
-    extra_text=''
     for macro in MACROS:
         if macro in text:
             start, end = re.search(macro, text).span()
@@ -45,12 +44,11 @@ def parse_text(text, patterns = 'normal'):
 
     for thing in patpats:
         results = re.findall(patpats[thing], text)
-        results += re.findall(patpats[thing], extra_text)
         for r in results:
             out.append((thing, r))
 
-
     return out
+
 
 def set_macro(inputs, *args, **kwargs):
     full = json.load(open('macros.txt', 'r'))

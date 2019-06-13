@@ -34,16 +34,15 @@ def cardsearch(inputs, *args, **kwargs):
     print(inputs)
     msgs = []
     n=0
-    for input in inputs:
-        try:
-            image = get_card(input)
-            if image is not None:
-                msgs.append(image_msg(image))
-                n+=1
-            if n==5:
-                break
-        except Exception as E:
-            print(E)
+    try:
+        image = get_card(inputs)
+        if image is not None:
+            msgs.append(image_msg(image))
+            n+=1
+        if n==5:
+            break
+    except Exception as E:
+        print(E)
     if len(msgs)>0:
         print(msgs)
         return(msgs)
@@ -68,7 +67,7 @@ def echo(inputs, *args, **kwargs):
     return(inputs[1])
 
 def dndparse(inputs, *args, **kwargs):
-    return parse_text([text.strip() for text in inputs[0].split(';')], patterns='dnd')
+    return [parse_text(text.strip(), patterns='dnd') for text in inputs.split(';')]
 
 def set_var():
     pass
