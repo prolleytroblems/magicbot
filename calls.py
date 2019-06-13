@@ -68,7 +68,7 @@ def dndprocess(inputs, *args, **kwargs):
     print(inputs)
     return [process_msg(text.strip(), patterns='dnd') for text in inputs.split(';')]
 
-def echo_inputs(*args, **kwargs):
+def echo_args(*args, **kwargs):
     return ''.join(args)
 
 def set_var():
