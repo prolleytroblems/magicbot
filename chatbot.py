@@ -36,10 +36,10 @@ def process_msg(message, reply_token, access_token, **kwargs):
         'cadu': (insultar_cadu, ()),
         'roll': (roll_once, ()),
         'macro': (macro, ()),
-        'echo': echo,
-        'set_macro': macro,
-        'set_var': set_var,
-        'clear': clear,
+        'echo': (echo, ()),
+        'set_macro': (macro, ()),
+        'set_var': (set_var, ()),
+        'clear': (clear, ()),
         'clear_all': clearall,
         'roll_long': roll_long
 
