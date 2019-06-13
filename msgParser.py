@@ -25,7 +25,7 @@ DND_PATTERNS = {
 
 def parse_text(text, patterns = 'normal'):
     #patterndict is a dict of obj: patterns, outputs obj: result from re
-    print(text, patterns)
+    print("Parse call, text: '{}', mode: {}".format(text, patterns))
     out = []
     text = text.lower()
 
