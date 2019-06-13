@@ -1,6 +1,7 @@
 import random
 
 def roll(rollargs):
+    print(args)
     args = []
 
     for i in rollargs:
