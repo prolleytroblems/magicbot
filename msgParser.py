@@ -47,6 +47,7 @@ def parse_text(text, patterns = 'normal'):
         for r in results:
             out.append((thing, r))
 
+    print(out)
     return out
 
 
