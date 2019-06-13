@@ -40,7 +40,7 @@ def parse_text(text, patterns = PATTERNS):
         results = re.findall(PATTERNS[thing], text)
         results += re.findall(PATTERNS[thing], extra_text)
         for r in results:
-            out.append= (thing, r)
+            out.append((thing, r))
 
     return out
 
