@@ -71,7 +71,7 @@ def dndprocess(reply_token, access_token, process_msg, inputs, *args, **kwargs):
         out, message = process_msg(reply_token, access_token, text.strip(), patterns='dnd')
         outs.append(out)
         messages += messages
-    return(outs, messages)
+    return('\n'.join(outs), messages)
 
 def echo_args(*args, **kwargs):
     return ''.join(args)
