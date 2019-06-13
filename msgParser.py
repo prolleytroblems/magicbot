@@ -24,7 +24,7 @@ DND_PATTERNS = {
 }
 #add: reset macros, show all macros, titles on macros, make different functions add to the same reply
 
-def parse_text(text, patterns = PATTERNS):
+def parse_text(text, patterns = 'normal'):
     #patterndict is a dict of obj: patterns, outputs obj: result from re
     out = []
     text = text.lower()
@@ -37,11 +37,19 @@ def parse_text(text, patterns = PATTERNS):
             newtext = text[:start]+MACROS[macro]+text[end:]
             return parse_text(newtext)
 
-    for thing in PATTERNS:
-        results = re.findall(PATTERNS[thing], text)
-        results += re.findall(PATTERNS[thing], extra_text)
+    if patterns = 'normal':
+        patpats = PATTERNS
+    elif patterns = 'dnd':
+        patpats = DND_PATTERNS
+    else:
+        raise ValueError()
+        
+    for thing in patpats:
+        results = re.findall(patpats[thing], text)
+        results += re.findall(patpats[thing], extra_text)
         for r in results:
             out.append((thing, r))
+
 
     return out
 
