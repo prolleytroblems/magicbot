@@ -65,8 +65,8 @@ def process_msg(reply_token, access_token, inputs, **kwargs):
             messages += r
         elif isinstance(r, dict):
             messages.append(r)
-        elif r is tuple:
-            if len(out)>0:
+        elif isinstance(r, tuple):
+            if len(r[0])>0:
                 out.append(r[0])
             messages+=r[1]
         elif r is None:
