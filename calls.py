@@ -51,7 +51,10 @@ def cardsearch(inputs, *args, **kwargs):
 def roll_dice(inputs, *args, **kwargs):
     return('\n'.join([str(roll(params)) for params in inputs]))
 
-def macro(inputs, **kwargs):
+def echo(inputs, *args, **kwargs):
+    return(inputs[1])
+
+def macro(inputs, *args, **kwargs):
     out = set_macro(inputs)
     return(out)
 

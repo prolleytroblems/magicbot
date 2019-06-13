@@ -43,20 +43,18 @@ def process_msg(message, reply_token, access_token, **kwargs):
 
     out = []
     messages = []
-    order = ['macro','roll','card','cube','draft','gnomo','cadu','goodbot']
-    for job in order:
-        if job in results:
-            r = functions[job][0](*functions[job][1], inputs=results[job], **kwargs)
-            if isinstance(r, str):
-                out.append(r)
-            elif isinstance(r, list):
-                messages += r
-            elif isinstance(r, dict):
-                messages.append(r)
-            elif r is None:
-                pass
-            else:
-                raise TypeError('Something wrong with the call func output')
+    for job, inputs in results:
+        r = functions[job][0](*functions[job][1], inputs=inputs, **kwargs)
+        if isinstance(r, str):
+            out.append(r)
+        elif isinstance(r, list):
+            messages += r
+        elif isinstance(r, dict):
+            messages.append(r)
+        elif r is None:
+            pass
+        else:
+            raise TypeError('Something wrong with the call func output')
 
     out = '\n'.join(out)
     messages.append(text_msg(out))
