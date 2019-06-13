@@ -34,8 +34,8 @@ def return_msg(reply_token, access_token, message, **kwargs):
 
 def process_msg(reply_token, access_token, inputs, **kwargs):
     functions = {
-        'cube': (text_reply, (CUBE_URL)),
-        'draft': (text_reply, (DRAFT_URL)),
+        'cube': (echo_inputs, (CUBE_URL)),
+        'draft': (echo_inputs, (DRAFT_URL)),
         'card': (cardsearch, ()),
         'gnomo': (insultar_gnomo, ()),
         'goodbot': (good_bot, ()),
