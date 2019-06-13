@@ -9,7 +9,7 @@ PATTERNS = {
     'goodbot': r'good.*bot',
     'cadu': r'(cadu|kadu)',
     'dnd': r'<(.*?)>',
-    'macro': '#(.*?) '
+    'macro': '#(.*?) ',
     'roll': r'([\d]{0,2})d([\d]{1,3})((\+|\-)(\d+))?'
 }
 
