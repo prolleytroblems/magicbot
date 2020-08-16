@@ -3,9 +3,8 @@ import time
 
 import requests
 
-CUBE_URL = 'https://manaburn.org/wizards/delouge/cubes/b47acf4/list'
-DRAFT_URL = 'https://manaburn.org/wizards/delouge/cubes/b47acf4/drafts'
-
+CUBE_URL = 'https://cubecobra.com/cube/list/rhombus'
+DRAFT_URL = 'https://cubecobra.com/cube/playtest/rhombus'
 
 def get_card(cardname):
     cardname = cardname.replace(" ", "%20").replace("'", "%27").replace('/', '%2F')
